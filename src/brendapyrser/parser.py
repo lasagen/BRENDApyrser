@@ -331,9 +331,8 @@ class Reaction:
         try:
             left, right = regex_tags
             searched_s = re.search(f"{left}(.+?){right}", line)
-            span = searched_s.span()
-            matched_s = line[span[0] + 1 : span[1] - 1].strip()
-            line = line.replace(f"{searched_s.group()}", "")
+            matched_s = searched_s.group().strip()
+            line = line.replace(f"{matched_s}", "")
             return (line, matched_s)
         except Exception:
             return (line, "")
@@ -364,7 +363,7 @@ class Reaction:
         """
         line = self.__removeTabs(line)
         line, specific_info = self.__extractDataField(line, ("{", ".*}"))
-        line, meta = self.__extractDataField(line, ("\(", ".*\)"))
+        line, meta = self.__extractDataField(line, ("\s+\(", ".*\)"))
         line, meta_pipe = self.__extractDataField(line, ("\|", "\|"))
         meta += meta_pipe
         line, refs = self.__extractDataField(line, ("<", ">"))
@@ -373,6 +372,7 @@ class Reaction:
             value = self.__eval_range_value(line.strip())
         else:
             value = line.strip()
+        print(f"meta: {meta}")
         return {
             "value": value,
             "species": species.split(","),
