@@ -365,6 +365,8 @@ class Reaction:
         line = self.__removeTabs(line)
         line, specific_info = self.__extractDataField(line, ("{", ".*}"))
         line, meta = self.__extractDataField(line, ("\(", ".*\)"))
+        line, meta_pipe = self.__extractDataField(line, ("\|", "\|"))
+        meta += meta_pipe
         line, refs = self.__extractDataField(line, ("<", ">"))
         line, species = self.__extractDataField(line, ("#", "#"))
         if numeric_value:
@@ -385,6 +387,8 @@ class Reaction:
         """
         line = self.__removeTabs(line)
         line, meta = self.__extractDataField(line, ("\(", ".*\)"))
+        line, meta_pipe = self.__extractDataField(line, ("\|", "\|"))
+        meta += meta_pipe
         rxn_str = line.strip()
         meta_list = []
         for meta_line in meta.split(";"):
