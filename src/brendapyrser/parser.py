@@ -567,8 +567,8 @@ class Reaction:
             )
             try:
                 subs, prods = rxn.split("=")
-                subs = [s.strip() for s in subs.split("+") if s.strip() != ""]
-                prods = [s.strip() for s in prods.split("+") if s.strip() != ""]
+                subs = [s.strip() for s in subs.split(" + ") if s.strip() != ""]
+                prods = [s.strip() for s in prods.split(" + ") if s.strip() != ""]
                 subs.sort()
                 prods.sort()
                 if subs not in substrates and len(subs) > 0 and len(prods) > 0:
