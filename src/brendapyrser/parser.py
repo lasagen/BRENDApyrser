@@ -332,7 +332,7 @@ class Reaction:
             left, right = regex_tags
             searched_s = re.search(f"{left}(.+?){right}", line)
             matched_s = searched_s.group().strip()[1:-1]
-            line = line.replace(f"{matched_s}", "")
+            line = line.replace(f"{searched_s.group()}", "")
             return (line, matched_s)
         except Exception:
             return (line, "")
