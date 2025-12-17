@@ -372,7 +372,6 @@ class Reaction:
             value = self.__eval_range_value(line.strip())
         else:
             value = line.strip()
-        print(f"meta: {meta}")
         return {
             "value": value,
             "species": species.split(","),
